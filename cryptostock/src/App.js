@@ -24,7 +24,7 @@ class App extends Component {
 
 
 
-    this.setState(({ selectedPairs }) => {
+    this.setState(({ selectedPairs, activePairs }) => {
 
       //спреадоператор Все что было в массиве положил в новый массив
       let pairs = [...selectedPairs];
@@ -63,7 +63,7 @@ class App extends Component {
         </aside>
 
         <main>
-          {this.state.selectedPairs.map(pair => <Ticker key={pair} pair={pair} />)}
+          {this.state.selectedPairs.map(pair => <Ticker key={pair} pair={pair} isActive={this.state.activePairs.include} />)}
 
 
         </main>

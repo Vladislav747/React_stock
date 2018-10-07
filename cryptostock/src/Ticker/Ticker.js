@@ -7,32 +7,72 @@ export default class Ticker extends React.Component {
    state = {
        value: 0,
    };
-   //http://coins.demo.javascript.ninja/ticker/${props.pair}
+
+   /**
+    *  //Функция для Работы с JSON массивами
+    */
    fetchData = () => {
-    return fetch(`https://s2.coinmarketcap.com/generated/search/quick_search_exchanges.json`)
-     //TODO: Правильно разпарсить json
-    .then(r => r.json())
-     .then(res => {
-       this.setState({
-        value: res.last,
-       });
-     });
+   
+    
+    return fetch('https://s2.coinmarketcap.com/generated/search/quick_search_exchanges.json')
+   
+    .then(response => response.json())
+    .then((response) => {
+        var res1 = response;
+           console.log(res1[0].name);  
+    })
+    .then((responseJson) => {
+        console.log(responseJson);  
+        return responseJson;
+     this.setState({
+    value: responseJson.last,
+    });
+    })
+    .catch((error) => {
+        console.error(error);
+      });
+
+    
+   
+    
+    //  .catch((error) {
+    //     console.error(error);
+    //   });
    }
+
+/**
+    *  //Функция для Работы с JSON объектами
+    */
+   getMoviesFromApiAsync() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+           console.log(responseJson.movies[0].releaseYear);  
+        return responseJson.movies[0].releaseYear;
+       })
+       .then(res => {
+        this.setState({
+        value: res,
+        });   
+       })
+       
+      
+      .catch((error) => {
+        console.error(error);
+      });
+
+     
+  }
     constructor (props){
         //Если вдруг используем наследование то props не потеряется
       super(props);
       console.log(props);
-      this.fetchData();
-      setInterval(this.fetchData, 1000);
+      this.getMoviesFromApiAsync();
+      //setInterval(this.getMoviesFromApiAsync);
 
       
     }
 
-
-    //вызывается непосредственно перед рендерингом компонента
-    componentWillMount(){
-
-    }
 
 render(){
     const {pair} = this.props; 
@@ -44,9 +84,14 @@ render(){
 
 //Элемент присоединился к Virtual Dom
 componentDidMount(){
-
+//this.fetchData();
+//this.interval = setInterval(this.fetchData, 10000);
+this.getMoviesFromApiAsync();
 }
-
+ //вызывается непосредственно перед рендерингом компонента
+    componentWillUnmount() {
+    //    clearInterval(this.interval);
+    }
 }
 
 
@@ -60,3 +105,17 @@ componentDidMount(){
 //         </div>
 //     )
 // }
+
+
+// ОТправить запрос
+// fetch('https://mywebsite.com/endpoint/', {
+//   method: 'POST',
+//   headers: {
+//     Accept: 'application/json',
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify({
+//     firstParam: 'yourValue',
+//     secondParam: 'yourOtherValue',
+//   }),
+// });
