@@ -14,6 +14,7 @@ class App extends Component {
     selectedPairs: [],
   };
 
+  //Сработка на клик
   handleCheckbox = currency => (event) => {
 
 
@@ -63,7 +64,7 @@ class App extends Component {
         </aside>
 
         <main>
-          {this.state.selectedPairs.map(pair => <Ticker key={pair} pair={pair} isActive={this.state.activePairs.include} />)}
+          {this.state.selectedPairs.map(pair => <Ticker key={pair} pair={pair} isActive={this.state.activePairs} />)}
 
 
         </main>
