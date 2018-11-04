@@ -46,8 +46,7 @@ export default class Ticker extends React.Component {
    getMoviesFromApiAsync() {
     return fetch('https://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
-      .then((responseJson) => {
-           console.log(responseJson.movies[0].releaseYear);  
+      .then((responseJson) => {          
         return responseJson.movies[0].releaseYear;
        })
        .then(res => {
@@ -63,11 +62,33 @@ export default class Ticker extends React.Component {
 
      
   }
+
+  getMoviesFromApiAsync1() { 
+    return fetch('https://api.coinmarketcap.com/v2/ticker/1/')
+      .then((response) => response.json())
+      .then((responseJson) => { 
+          console.log(responseJson.data.quotes.USD.price);         
+        return responseJson.data.quotes.USD.price;
+       })
+       .then(res => {
+        this.setState({
+        value: res,
+        });   
+       })
+      
+      .catch((error) => {
+        console.error(error);
+      });
+
+     
+  }
+  
     constructor (props){
         //Если вдруг используем наследование то props не потеряется
       super(props);
       console.log(props);
-      this.getMoviesFromApiAsync();
+    //   this.getMoviesFromApiAsync();
+      this.getMoviesFromApiAsync1();
       //setInterval(this.getMoviesFromApiAsync);
 
       
@@ -78,7 +99,7 @@ render(){
     const {pair} = this.props; 
     return ( <div className="ticker">
     <p>{pair.toLowerCase()}</p>
-    <p>{this.state.value}</p>
+    <p>{this.state.value} USD</p>
 </div>
 )}
 
@@ -93,7 +114,6 @@ this.getMoviesFromApiAsync();
     //    clearInterval(this.interval);
     }
 }
-
 
 //Раньше экспортировали через функцию
 

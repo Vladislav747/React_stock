@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import ReactDOM from 'react-dom';
 import './App.css';
-
-
+import $ from 'jquery'; 
 //Array
-//var currencies = ["hui"] ;
 import currencies from './cryptocurrencies'
 import Ticker from './Ticker/Ticker'
 class App extends Component {
@@ -12,6 +11,8 @@ class App extends Component {
   //Ставим изначальный state
   state = {
     selectedPairs: [],
+    activePairs: [],
+    currenciesList: [],
   };
 
   //Сработка на клик
@@ -34,16 +35,63 @@ class App extends Component {
         pairs.push(currency);
         console.log(pairs);
       } else {
+        //Если отсутсвует галочка(checked ) то убираем этот элемент из массива
+       //currency значение элемента валюта - сравниваем с каждым элементом массива 
+       //чтобы не один не равнялся ему и тогда убираем
         pairs = pairs.filter(pair => pair !== currency);
       }
 
+      //Возвращаем state который положили
       return {
         selectedPairs: pairs,
       }
     })
   };
 
+
+//В далнейшем для интерактивного вывода с API
+  getCurrenciesApi() {
+    
+    let responseMap;
+    return fetch('https://api.coinmarketcap.com/v2/ticker/?limit=10')
+      .then((response) => response.json())
+      .then((responseJson) => { 
+        responseMap = responseJson.data;
+          console.log('getCurrenciesApi ' + responseMap)  
+            
+        return responseMap;
+       })
+       .then(res => {
+        
+        this.setState({
+        currenciesList: res,
+        });   
+        console.log(this.state.currenciesList)
+       })
+
+      
+      .catch((error) => {
+        console.error(error);
+      })
+    
+  
+}  
+    
+
+componentDidMount(){
+  //this.getCurrenciesApi();
+  let currenciesList = this.state.currenciesList;
+}
+
+
+    
+
   render() {
+ if(this.state.currenciesList){
+let currenciesList = this.state.currenciesList;
+}
+
+
     return (
       <div className="App">
         <header className="App-header">
@@ -60,14 +108,20 @@ class App extends Component {
               </li>
 
             ))}
+
+
+
+
           </ul>
         </aside>
 
         <main>
+        {/* Здесь будет выводиться список элементов которые были КЛИКнуты*/}
           {this.state.selectedPairs.map(pair => <Ticker key={pair} pair={pair} isActive={this.state.activePairs} />)}
 
 
         </main>
+       
       </div>
     );
   }
