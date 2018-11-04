@@ -84,7 +84,7 @@ export default class Ticker extends React.Component {
   }
   
     constructor (props){
-        //Если вдруг используем наследование то props не потеряется
+        //Если вдруг используем наследование то props не потеряетс
       super(props);
       console.log(props);
     //   this.getMoviesFromApiAsync();
