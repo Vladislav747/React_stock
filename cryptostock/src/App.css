@@ -10,7 +10,6 @@
 .App-header {
   background-color: #222;
   height: 150px;
-  padding: 20px;
   color: white;
 }
 
@@ -21,6 +20,14 @@
 .App-intro {
   font-size: large;
 }
+
+.currenciesLabel{
+  margin-left: 20px;
+}
+.currenciesTicker {
+  text-align: center;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
