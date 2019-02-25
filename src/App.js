@@ -41,26 +41,7 @@ class App extends Component {
   };
 
 
-  //В далнейшем для интерактивного вывода с API
-  getCurrenciesApi() {
-    let responseMap;
-    return fetch('https://api.coinmarketcap.com/v2/ticker/?limit=10')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        responseMap = responseJson.data;
-        console.log('getCurrenciesApi ' + responseMap)
-        return responseMap;
-      })
-      .then(res => {
-        this.setState({
-          currenciesList: res,
-        });
-        console.log(this.state.currenciesList)
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-  }
+  
 
   componentDidMount() {
     //this.getCurrenciesApi();
