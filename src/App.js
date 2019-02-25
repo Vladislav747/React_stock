@@ -28,9 +28,6 @@ class App extends Component {
         pairs.push(currency);
         console.log(pairs);
       } else {
-        //Если отсутсвует галочка(checked ) то убираем этот элемент из массива
-        //currency значение элемента валюта - сравниваем с каждым элементом массива 
-        //чтобы не один не равнялся ему и тогда убираем
         pairs = pairs.filter(pair => pair !== currency);
       }
       //Возвращаем state который положили
@@ -44,7 +41,6 @@ class App extends Component {
   
 
   componentDidMount() {
-    //this.getCurrenciesApi();
     let currenciesList = this.state.currenciesList;
   }
 
@@ -62,7 +58,6 @@ class App extends Component {
         </header>
         <aside>
           <ul className="currList">
-            {/*Для каждого элемента массива currencies мы создаем <li>   */}
             {currencies.map(curr => (
               <li key={curr} className="currItem">
                 <Segment compact>
@@ -75,7 +70,6 @@ class App extends Component {
 
         <main>
           <Card.Group>
-            {/* Здесь будет выводиться список элементов которые были Кликнуты*/}
             {this.state.selectedPairs.map(pair =>
               <Card>
                 <Ticker className="currenciesTicker" key={pair} pair={pair} isActive={this.state.activePairs} />

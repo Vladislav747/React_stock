@@ -1,6 +1,7 @@
 
 var currencies =
-    ["Bitcoin",
+    [
+        "Bitcoin",
         "Ethereum",
         "Litecoin",
         "Bitcoin Cash",
