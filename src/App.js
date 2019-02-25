@@ -19,10 +19,8 @@ class App extends Component {
 
   //Сработка на клик
   handleCheckbox = currency => (event) => {
-    //равносильно const checked = event.target.checked;
     const { checked } = event.target;
     this.setState(({ selectedPairs, activePairs }) => {
-      //спреадоператор Все что было в массиве положил в новый массив
       let pairs = [...selectedPairs];
       if (checked) {
         pairs.push(currency);
