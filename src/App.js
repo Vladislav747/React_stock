@@ -3,11 +3,11 @@ import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './App.css';
 import $ from 'jquery';
-import { Checkbox, Segment } from 'semantic-ui-react'
-import { Card } from 'semantic-ui-react'
+import { Checkbox, Segment } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 //Staic Array
-import currencies from './cryptocurrencies'
-import Ticker from './Ticker/Ticker'
+import currencies from './api/cryptocurrencies';
+import Ticker from './components/Ticker';
 class App extends Component {
 
   //Ставим изначальный state

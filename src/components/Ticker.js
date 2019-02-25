@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './Ticker.css';
+import '../css/Ticker.css';
 import $ from 'jquery';
 export default class Ticker extends React.Component {
 
