@@ -100,7 +100,7 @@ export default class Ticker extends React.Component {
   }
 
   constructor(props) {
-    //Если вдруг используем наследование то props не потеряетс
+    //Если вдруг используем наследование то props не потеряется
     super(props);
     console.log(props);
 
