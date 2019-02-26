@@ -74,7 +74,7 @@ export default class Ticker extends React.Component {
           value: res,
         });
       })
-      .catch((error) => {
+      .catch((e) => {
         if (e.name == 'URIError') {
           throw new ReadError("Ошибка в URI", e);
       } else if (e.name == 'SyntaxError') {
