@@ -41,22 +41,22 @@ export default class Ticker extends React.Component {
         switch (currency) {
 
           case "BCH":
-            return responseJson.data.BCH.quote.USD.price;
+            return Math.round(responseJson.data.BCH.quote.USD.price-1);
     
           case "LTC":
-            return responseJson.data.LTC.quote.USD.price;
+            return Math.round(responseJson.data.LTC.quote.USD.price,-1);
     
           case "BTC":
-            return responseJson.data.BTC.quote.USD.price;
+            return Math.round(responseJson.data.BTC.quote.USD.price,-1);
     
           case "ETH":
-            return responseJson.data.ETH.quote.USD.price;
+            return  Math.round(responseJson.data.ETH.quote.USD.price,-1);
     
           case "XLM":
-            return responseJson.data.XLM.quote.USD.price;
+            return  Math.round(responseJson.data.XLM.quote.USD.price,-1);
     
           case "XRP":
-            return responseJson.data.XRP.quote.USD.price;
+            return Math.round(responseJson.data.XRP.quote.USD.price-1);
     
           default:
             break;
@@ -64,7 +64,7 @@ export default class Ticker extends React.Component {
       })
       .then(res => {
         this.setState({
-          value: Math.round(res,-1),
+          value: res,
         });
       })
       .catch((error) => {

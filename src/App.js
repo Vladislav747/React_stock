@@ -19,7 +19,7 @@ class App extends Component {
   //Сработка на клик
   handleCheckbox = currency => (event) => {
     const { checked } = event.target;
-    this.setState(({ selectedPairs, activePairs }) => {
+    this.setState(({ selectedPairs}) => {
       let pairs = [...selectedPairs];
       if (checked) {
         pairs.push(currency);
@@ -35,9 +35,6 @@ class App extends Component {
   };
 
   render() {
-
-   
-
 
     return (
       <div className="App">
