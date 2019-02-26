@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import ReactDOM from 'react-dom';
 import './App.css';
 import $ from 'jquery';
 import { Checkbox, Segment } from 'semantic-ui-react';
@@ -35,17 +34,9 @@ class App extends Component {
     })
   };
 
-
-  
-
-  componentDidMount() {
-    let currenciesList = this.state.currenciesList;
-  }
-
   render() {
-    if (this.state.currenciesList) {
-      let currenciesList = this.state.currenciesList;
-    }
+
+   
 
 
     return (
@@ -78,7 +69,8 @@ class App extends Component {
 
       </div>
     );
-  }
+  } 
 }
+
 
 export default App;

@@ -30,28 +30,6 @@ export default class Ticker extends React.Component {
       });
   }
 
-  /**
-      *  //Функция для Работы с JSON объектами
-      */
-  getMoviesFromApiAsyncFromFacebook() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson.movies[0].releaseYear;
-      })
-      .then(res => {
-        this.setState({
-          value: res,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-
-
-
   getMoviesFromApiAsync(currency) {
     return fetch('https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + currency + '&convert=USD', {
       headers: {
@@ -86,7 +64,7 @@ export default class Ticker extends React.Component {
       })
       .then(res => {
         this.setState({
-          value: res,
+          value: Math.round(res,-1),
         });
       })
       .catch((error) => {
@@ -121,8 +99,6 @@ export default class Ticker extends React.Component {
     }
   }
 
- 
-
   constructor(props) {
     //Если вдруг используем наследование то props не потеряетс
     super(props);
@@ -139,11 +115,6 @@ export default class Ticker extends React.Component {
       <p>{this.state.value} USD</p>
     </div>
     )
-  }
-
-  //Элемент присоединился к Virtual Dom
-  componentDidMount() {
-    this.getMoviesFromApiAsyncFromFacebook();
   }
 }
 
