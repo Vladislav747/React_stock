@@ -1,12 +1,22 @@
 
 import React from 'react';
 import '../css/Ticker.css';
-import $ from 'jquery';
+
 export default class Ticker extends React.Component {
 
-  state = {
-    value: 0,
-  };
+  constructor(props) {
+    super(props);
+    console.log("Our props Ticker", props);
+    this.state = {
+      value: 0
+    };
+    //Только для function а не functional declaration
+    this.getCurrenciesFromApiAsync = this.getCurrenciesFromApiAsync.bind(this); 
+    this.getApiAbbreviationFromCurrency = this.getApiAbbreviationFromCurrency.bind(this); 
+
+    var currency = this.getApiAbbreviationFromCurrency(props.pair);
+    this.getCurrenciesFromApiAsync(currency);
+  }
 
   /**
    * Возвращает данные по криптовалютам с сервера coinmarketcap
@@ -37,7 +47,7 @@ export default class Ticker extends React.Component {
    * 
    * @param  {string} currency
    */
-  getCurrenciesFromApiAsyncgetCurrenciesFromApiAsync(currency) {
+  getCurrenciesFromApiAsync(currency) {
     return fetch('https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + currency + '&convert=USD', {
       headers: {
         'X-CMC_PRO_API_KEY': '523dd32d-0443-4acb-bad3-00dbab6f344d',
@@ -76,9 +86,9 @@ export default class Ticker extends React.Component {
       })
       .catch((e) => {
         if (e.name == 'URIError') {
-          throw new ReadError("Ошибка в URI", e);
+          throw new Error("Ошибка в URI", e);
       } else if (e.name == 'SyntaxError') {
-          throw new ReadError("Синтаксическая ошибка в данных", e);
+          throw new Error("Синтаксическая ошибка в данных", e);
       } else {
           throw e; // пробрасываем
       }
@@ -118,18 +128,9 @@ export default class Ticker extends React.Component {
     }
   }
 
-  constructor(props) {
-    //Если вдруг используем наследование то props не потеряется
-    super(props);
-    console.log(props);
-
-    var currency = this.getApiAbbreviationFromCurrency(props.pair);
-    this.getCurrenciesFromApiAsync(currency);
-  }
   render() {
-    const { pair } = this.props;
     return (<div className="ticker">
-      <p>{pair.toLowerCase()}</p>
+      <p>{this.props.pair.toLowerCase()}</p>
       <p>{this.state.value} USD</p>
     </div>
     )
