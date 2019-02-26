@@ -9,7 +9,9 @@ export default class Ticker extends React.Component {
   };
 
   /**
-   *  //Функция для Работы с JSON массивами
+   * Возвращает данные по криптовалютам с сервера coinmarketcap
+   * 
+   * @return {object}
    */
   fetchData = () => {
     return fetch('https://s2.coinmarketcap.com/generated/search/quick_search_exchanges.json')
@@ -30,7 +32,12 @@ export default class Ticker extends React.Component {
       });
   }
 
-  getCurrenciesFromApiAsync(currency) {
+  /**
+   * Получает и устанавливает данные для state "value" с сервиса coinmarketcap
+   * 
+   * @param  {string} currency
+   */
+  getCurrenciesFromApiAsyncgetCurrenciesFromApiAsync(currency) {
     return fetch('https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + currency + '&convert=USD', {
       headers: {
         'X-CMC_PRO_API_KEY': '523dd32d-0443-4acb-bad3-00dbab6f344d',
@@ -41,23 +48,23 @@ export default class Ticker extends React.Component {
         switch (currency) {
 
           case "BCH":
-            return Math.round(responseJson.data.BCH.quote.USD.price-1);
-    
+            return Math.round(responseJson.data.BCH.quote.USD.price - 1);
+
           case "LTC":
-            return Math.round(responseJson.data.LTC.quote.USD.price,-1);
-    
+            return Math.round(responseJson.data.LTC.quote.USD.price, -1);
+
           case "BTC":
-            return Math.round(responseJson.data.BTC.quote.USD.price,-1);
-    
+            return Math.round(responseJson.data.BTC.quote.USD.price, -1);
+
           case "ETH":
-            return  Math.round(responseJson.data.ETH.quote.USD.price,-1);
-    
+            return Math.round(responseJson.data.ETH.quote.USD.price, -1);
+
           case "XLM":
-            return  Math.round(responseJson.data.XLM.quote.USD.price,-1);
-    
+            return Math.round(responseJson.data.XLM.quote.USD.price, -1);
+
           case "XRP":
-            return Math.round(responseJson.data.XRP.quote.USD.price-1);
-    
+            return Math.round(responseJson.data.XRP.quote.USD.price - 1);
+
           default:
             break;
         }
@@ -72,6 +79,11 @@ export default class Ticker extends React.Component {
       });
   }
 
+  /**
+   * Возвращает аббервиатуру криптовалюты
+   * 
+   * @param  {string} curr
+   */
   getApiAbbreviationFromCurrency(curr) {
 
     switch (curr) {
