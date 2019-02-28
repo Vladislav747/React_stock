@@ -1,0 +1,3 @@
+export const GET_DATA_CURRENCIES = 'GET_DATA_CURRENCIES';
+export const FETCH_DATA = "FETCH_DATA";
+export const FETCH_ERROR = "FETCH_ERROR";
