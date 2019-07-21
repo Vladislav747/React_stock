@@ -1,19 +1,10 @@
 import { GET_DATA_CURRENCIES, FETCH_DATA, FETCH_ERROR } from './action-types';
-import { getRecipes } from '../services/mLab';
+
 import { configs } from '../dbConfig/config';
 
-export function changeIsFormOpen(payload) {
-
-    return { type: CHANGE_FORM_OPEN, payload }
-}
-export function addDataIngredient(payload) {
-
-    return { type: ADD_DATA_INGREDIENT, payload }
-}
-
-export function getDataIngredient(json) {
+export function getDataCurrencies(json) {
     return {
-        type: GET_DATA_INGREDIENT,
+        type: GET_DATA_CURRENCIES,
         payload: json
     }
 }
@@ -31,7 +22,7 @@ export function getDataError(err){
     }
 }
 
-export function fetchDataIngredient() {
+export function fetchDataCurrencies() {
        
     return dispatch => {
         dispatch(fetchData())

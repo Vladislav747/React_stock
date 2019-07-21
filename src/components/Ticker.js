@@ -32,7 +32,6 @@ export default class Ticker extends React.Component {
       })
       .then((responseJson) => {
         console.log(responseJson);
-        return responseJson;
         this.setState({
           value: responseJson.last,
         });
