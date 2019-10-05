@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 
@@ -7,7 +6,7 @@ import '../css/style.css';
 import { Checkbox, Segment } from 'semantic-ui-react';
 import { Card } from 'semantic-ui-react';
 //Staic Array
-import currencies from '../data/cryptocurrencies';
+import currencies from '../utils/cryptocurrencies';
 import Ticker from '../components/Ticker';
 
 
@@ -25,6 +24,7 @@ export default class App extends Component {
     handleCheckbox = currency => (event) => {
       const { checked } = event.target;
       this.setState(({ selectedPairs }) => {
+       //console.log(selectedPairs);
         let pairs = [...selectedPairs];
         if (checked) {
           pairs.push(currency);
