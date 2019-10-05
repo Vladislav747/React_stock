@@ -1,5 +1,5 @@
 
-import {GET_DATA_INGREDIENT, FETCH_DATA, FETCH_ERROR } from '../action-types';
+import {GET_DATA_INGREDIENT, FETCH_DATA, FETCH_ERROR } from '../actions/action-types';
 import { combineReducers } from 'redux';
 
 
@@ -24,7 +24,7 @@ function reducer (state = initialState, action) {
             return {...state, isLoading: true}
 
         case FETCH_ERROR:
-        return {...state, isError:true}
+            return {...state, isError:true}
 
         case GET_DATA_INGREDIENT:
         
