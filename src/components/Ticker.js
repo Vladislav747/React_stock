@@ -1,21 +1,22 @@
 
 import React from 'react';
 import '../css/Ticker.css';
+import Modal from 'react-modal';
 
 export default class Ticker extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("Our props Ticker", props);
     this.state = {
       value: 0
     };
+
     //Только для function а не functional declaration
-    this.getCurrenciesFromApiAsync = this.getCurrenciesFromApiAsync.bind(this); 
+    this.fetchDataCurrencies = this.fetchDataCurrencies.bind(this); 
     this.getApiAbbreviationFromCurrency = this.getApiAbbreviationFromCurrency.bind(this); 
 
     var currency = this.getApiAbbreviationFromCurrency(props.pair);
-    this.getCurrenciesFromApiAsync(currency);
+    this.fetchDataCurrencies(currency);
   }
 
   /**
@@ -26,18 +27,13 @@ export default class Ticker extends React.Component {
   fetchData = () => {
     return fetch('https://s2.coinmarketcap.com/generated/search/quick_search_exchanges.json')
       .then(response => response.json())
-      .then((response) => {
-        var res1 = response;
-        console.log(res1[0].name);
-      })
       .then((responseJson) => {
-        console.log(responseJson);
         this.setState({
           value: responseJson.last,
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((e) => {
+        throw new Error("ошибка получения данных в Ticker fetchData", e);
       });
   }
 
@@ -46,7 +42,7 @@ export default class Ticker extends React.Component {
    * 
    * @param  {string} currency
    */
-  getCurrenciesFromApiAsync(currency) {
+  fetchDataCurrencies(currency) {
     return fetch('https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + currency + '&convert=USD', {
       headers: {
         'X-CMC_PRO_API_KEY': '523dd32d-0443-4acb-bad3-00dbab6f344d',
@@ -89,7 +85,7 @@ export default class Ticker extends React.Component {
   }
 
   /**
-   * Возвращает аббервиатуру криптовалюты
+   * Возвращает аббревиатуру криптовалюты
    * 
    * @param  {string} curr
    */
@@ -121,7 +117,8 @@ export default class Ticker extends React.Component {
   }
 
   render() {
-    return (<div className="ticker">
+    return (
+    <div className="ticker">
       <p>{this.props.pair.toLowerCase()}</p>
       <p>{this.state.value} USD</p>
     </div>

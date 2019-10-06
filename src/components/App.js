@@ -5,7 +5,7 @@ import '../css/App.css';
 import '../css/style.css';
 import { Checkbox, Segment } from 'semantic-ui-react';
 import { Card } from 'semantic-ui-react';
-//Staic Array
+
 import currencies from '../utils/cryptocurrencies';
 import Ticker from '../components/Ticker';
 
@@ -20,19 +20,18 @@ export default class App extends Component {
       };
     }
   
-    //Сработка на клик
     handleCheckbox = currency => (event) => {
       const { checked } = event.target;
       this.setState(({ selectedPairs }) => {
-       //console.log(selectedPairs);
+
         let pairs = [...selectedPairs];
+
         if (checked) {
           pairs.push(currency);
-          console.log(pairs);
         } else {
           pairs = pairs.filter(pair => pair !== currency);
         }
-        //Возвращаем state который положили
+
         return {
           selectedPairs: pairs,
         }
@@ -57,12 +56,14 @@ export default class App extends Component {
                   <li key={curr} className="currItem">
                     <Segment compact>
                       <Checkbox 
-                      toggle 
-                      id={curr}
-                      onChange={this.handleCheckbox(curr)}></Checkbox>
+                          toggle 
+                          id={curr}
+                          onChange={this.handleCheckbox(curr)}>
+                      </Checkbox>
                       <label 
-                      className="currenciesLabel" 
-                      htmlFor={curr}>{curr.toUpperCase()}</label>
+                          className="currenciesLabel" 
+                          htmlFor={curr}>{curr.toUpperCase()}
+                      </label>
                     </Segment>
                   </li>
                 ))}
@@ -72,12 +73,12 @@ export default class App extends Component {
   
           <main>
             <Card.Group>
-              {this.state.selectedPairs.map(pair =>
-                <Card>
+              {this.state.selectedPairs.map((pair, i) => 
+                <Card key={i}>
                   <Ticker 
-                  className="currenciesTicker" 
-                  key={pair}
-                  pair={pair}
+                    className="currenciesTicker" 
+                    key={i}
+                    pair={pair}
                    />
                 </Card>
               )}

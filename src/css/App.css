@@ -28,6 +28,19 @@
   text-align: center;
 }
 
+.currItem{
+  list-style-type: none;
+  margin-bottom: 1%;
+}
+
+.ui.cards{
+  margin: auto 1%;
+}
+
+.ui.cards>.card{
+  margin-right: 3%;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

@@ -15,9 +15,6 @@ export const initialState = {
 //Если есть state то используем его иначе - изначальный state
 function reducer (state = initialState, action) {
 
-    console.log(state);
-    console.log(action.type);
-
     switch (action.type) {
 
         case FETCH_DATA:
