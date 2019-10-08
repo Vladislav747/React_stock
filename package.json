@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
     "react": "^16.5.2",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-bootstrap-modal": "^4.2.0",
     "react-dom": "^16.5.2",
     "react-modal": "^3.10.1",
     "react-scripts": "1.1.5",

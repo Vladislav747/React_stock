@@ -8,33 +8,19 @@ export default class Ticker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      value: 0,
+      showModal: false, 
+      modalText: ""
     };
 
     //Только для function а не functional declaration
     this.fetchDataCurrencies = this.fetchDataCurrencies.bind(this); 
     this.getApiAbbreviationFromCurrency = this.getApiAbbreviationFromCurrency.bind(this); 
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
 
     var currency = this.getApiAbbreviationFromCurrency(props.pair);
     this.fetchDataCurrencies(currency);
-  }
-
-  /**
-   * Возвращает данные по криптовалютам с сервера coinmarketcap
-   * 
-   * @return {object}
-   */
-  fetchData = () => {
-    return fetch('https://s2.coinmarketcap.com/generated/search/quick_search_exchanges.json')
-      .then(response => response.json())
-      .then((responseJson) => {
-        this.setState({
-          value: responseJson.last,
-        });
-      })
-      .catch((e) => {
-        throw new Error("ошибка получения данных в Ticker fetchData", e);
-      });
   }
 
   /**
@@ -116,11 +102,20 @@ export default class Ticker extends React.Component {
     }
   }
 
+  handleOpenModal () {
+    this.setState({ showModal: true });
+  }
+  
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+
   render() {
     return (
     <div className="ticker">
       <p>{this.props.pair.toLowerCase()}</p>
       <p>{this.state.value} USD</p>
+
     </div>
     )
   }

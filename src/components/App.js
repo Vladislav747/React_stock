@@ -8,7 +8,7 @@ import { Card } from 'semantic-ui-react';
 
 import currencies from '../utils/cryptocurrencies';
 import Ticker from '../components/Ticker';
-
+import CustomModal from '../components/CustomModal';
 
 export default class App extends Component {
 
@@ -36,7 +36,12 @@ export default class App extends Component {
           selectedPairs: pairs,
         }
       })
-    };
+    }
+
+
+
+
+
   
     render() {
   
@@ -49,6 +54,10 @@ export default class App extends Component {
             alt="logo" />
             <h1 className="App-title">Крипто биржа</h1>
           </header>
+
+          <CustomModal 
+            modalText = "Ошибка"
+           />
           <aside>
             <div className="currencies">
               <ul className="currList">
