@@ -1,8 +1,6 @@
+## React Cryptostock ##
 Project - CryptoStock React Project
 
-API Server - coinmarketcap
+API Server for bitcoin - coinmarketcap
 
 Stack of technologies - react, node, js, css
-Table of Contents
-npm start
-npm test
