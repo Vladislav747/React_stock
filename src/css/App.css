@@ -1,3 +1,7 @@
+*{
+  font: normal 16px/24px 'Roboto', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -9,25 +13,11 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  color: white;
 }
 
 .App-title {
   font-size: 1.5em;
 }
-
-.App-intro {
-  font-size: large;
-}
-
-.currenciesLabel{
-  margin-left: 20px;
-}
-.currenciesTicker {
-  text-align: center;
-}
-
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

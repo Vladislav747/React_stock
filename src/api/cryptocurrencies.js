@@ -9,5 +9,4 @@ var currencies =
         "XRP",
     ];
 
-
 module.exports = currencies;

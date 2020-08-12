@@ -1,0 +1,10 @@
+.banner{
+    padding: 77px 0;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F9F9FC 90.17%);
+}
+
+.banner__inner{
+    margin: 0 auto;
+    max-width: 996px;
+    text-align: center;
+}

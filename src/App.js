@@ -1,38 +1,58 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import $ from 'jquery';
-import { Checkbox, Segment } from 'semantic-ui-react';
-import { Card } from 'semantic-ui-react';
-//Staic Array
+
 import currencies from './api/cryptocurrencies';
 import Ticker from './components/Ticker';
+import Banner from './components/Banner';
+
+import logo from './logo.svg';
+import './css/App.css';
 class App extends Component {
 
   //Ставим изначальный state
   state = {
-    selectedPairs: [],
-    activePairs: [],
-    currenciesList: [],
+    currencies: currencies,
   };
 
-  //Сработка на клик
-  handleCheckbox = currency => (event) => {
-    const { checked } = event.target;
-    this.setState(({ selectedPairs}) => {
-      let pairs = [...selectedPairs];
-      if (checked) {
-        pairs.push(currency);
-        console.log(pairs);
-      } else {
-        pairs = pairs.filter(pair => pair !== currency);
-      }
-      //Возвращаем state который положили
-      return {
-        selectedPairs: pairs,
-      }
-    })
+   /**
+   *  //Анимация карусели
+   * 
+   * el - Элемент над которым будет происходить анимация
+   * blockWidth - ширина одного элемента в каруселе (ширина элемента + margin)
+   * count - количество элементов в каруселе
+   * direct - направление движение карусели
+  */
+
+ cards_animate (el, blockWidth, count, direct) {
+  const
+      speed = 75,
+      offset = blockWidth * count,
+      start = (direct) ? 0 : -offset,
+      end = (direct) ? -offset : 0;
+      
+  let reset = function() {
+      let m = parseInt($(this).css('margin-left'));
+      if(m === end) {
+          $(el).css('margin-left', start);
+          m = offset;
+      }else if(direct)
+          m += offset;
+      $(el).animate({'margin-left': end}, Math.abs(m) / speed * 1000, 'linear', reset);
   };
+
+  let pause = function() {
+      $(el).stop();
+  }
+  $(el).css('margin-left', start)
+      .animate({'margin-left': end}, offset / speed * 1000, 'linear', reset)
+      .mouseenter(pause).mouseleave(reset);
+
+}
+
+  componentDidMount() {
+    const galleryCards = document.getElementsByClassName('cards-container')[0];
+    this.cards_animate(galleryCards, 220, 4, true);
+ }
 
   render() {
 
@@ -40,28 +60,23 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Крипто биржа</h1>
         </header>
-        <aside>
-          <ul className="currList">
-            {currencies.map(curr => (
-              <li key={curr} className="currItem">
-                <Segment compact>
-                  <Checkbox toggle id={curr} onChange={this.handleCheckbox(curr)}></Checkbox>  <label className="currenciesLabel" htmlFor={curr}>{curr.toUpperCase()}</label>
-                </Segment>
-              </li>
-            ))}
-          </ul>
-        </aside>
+        
 
-        <main>
-          <Card.Group>
-            {this.state.selectedPairs.map(pair =>
-              <Card>
-                <Ticker className="currenciesTicker" key={pair} pair={pair} isActive={this.state.activePairs} />
-              </Card>
+        <main role="main">
+          <Banner
+            title="Сервис для покупки, продажи и управления портфелем криптовалют для всех"
+          />
+          <div className="cards-container d-flex flex-nowrap w-100 position-relative">
+            {this.state.currencies.map(pair =>
+              <Ticker 
+                key={pair} 
+                pair={pair}
+              />
             )}
-          </Card.Group>
+          </div>
+        
+          
         </main>
 
       </div>
