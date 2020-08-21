@@ -9,13 +9,6 @@ export default class Ticker extends React.Component {
   state = {
     value: 0,
   };
-
-  constructor(props) {
-    super(props);
-    
-    
-  }
-
   /**
    *  //Получить данные о валюте с API https://cors-anywhere.herokuapp.com
   */
