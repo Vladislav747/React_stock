@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import currencies from './api/cryptocurrencies';
-import Ticker from './components/Ticker';
-import Banner from './components/Banner';
+import {Ticker, Banner} from './components';
 
 import logo from './logo.svg';
 import './css/App.css';
@@ -31,7 +30,7 @@ class App extends Component {
       end = (direct) ? -offset : 0;
       
   let reset = function() {
-      let m = parseInt($(this).css('margin-left'));
+      let m = parseInt($(this).css('margin-left'), 10);
       if(m === end) {
           $(el).css('margin-left', start);
           m = offset;

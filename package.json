@@ -14,5 +14,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not IE_Mob 11",
+    "maintained node versions"
+  ]
 }

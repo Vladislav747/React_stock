@@ -1,8 +1,8 @@
 
 import React from 'react';
 
-import '../css/Ticker.css';
-import {getCurrency, getApiAbbreviationFromCurrency} from '../js/utility.js';
+import './Ticker.css';
+import { getApiAbbreviationFromCurrency} from '../../js/utility.js';
 
 export default class Ticker extends React.Component {
 
