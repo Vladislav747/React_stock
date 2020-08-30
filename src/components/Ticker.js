@@ -1,7 +1,8 @@
 
 import React from 'react';
+
+import {showNoty} from '../utility';
 import '../css/Ticker.css';
-import Modal from 'react-modal';
 
 export default class Ticker extends React.Component {
 
@@ -14,13 +15,17 @@ export default class Ticker extends React.Component {
     };
 
     //Только для function а не functional declaration
-    this.fetchDataCurrencies = this.fetchDataCurrencies.bind(this); 
+   
     this.getApiAbbreviationFromCurrency = this.getApiAbbreviationFromCurrency.bind(this); 
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
 
     var currency = this.getApiAbbreviationFromCurrency(props.pair);
     this.fetchDataCurrencies(currency);
+  }
+
+  componentDidMount(){
+    this.fetchDataCurrencies = this.fetchDataCurrencies.bind(this); 
   }
 
   /**
@@ -34,7 +39,13 @@ export default class Ticker extends React.Component {
         'X-CMC_PRO_API_KEY': '523dd32d-0443-4acb-bad3-00dbab6f344d',
       }
     })
-      .then((response) => response.json())
+      .then(
+          (response) => response.json()
+        )
+      .catch((e) => {
+          showNoty('Произошла ошибка с данными обратитесь к адимнистратору');
+          throw new Error("ошибка получения данных в Ticker", e);
+      })
       .then((responseJson) => {
         switch (currency) {
 
@@ -66,6 +77,7 @@ export default class Ticker extends React.Component {
         });
       })
       .catch((e) => {
+          showNoty('Произошла ошибка с данными обратитесь к адимнистратору');
           throw new Error("ошибка получения данных в Ticker", e);
       });
   }

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import { Checkbox, Segment, Card } from 'semantic-ui-react';
+
 
 import '../css/App.css';
 import '../css/style.css';
-import { Checkbox, Segment } from 'semantic-ui-react';
-import { Card } from 'semantic-ui-react';
+import logo from '../logo.svg';
 
-import currencies from '../utils/cryptocurrencies';
+import currencies from '../data/cryptocurrencies';
 import Ticker from '../components/Ticker';
-import CustomModal from '../components/CustomModal';
 
 export default class App extends Component {
 
@@ -55,9 +54,6 @@ export default class App extends Component {
             <h1 className="App-title">Крипто биржа</h1>
           </header>
 
-          <CustomModal 
-            modalText = "Ошибка"
-           />
           <aside>
             <div className="currencies">
               <ul className="currList">
